@@ -1,15 +1,17 @@
 from __future__ import print_function
-from flask import request, current_app
+
+from OctBlog.config import OctBlogSettings
 from blinker import Namespace
+from flask import request
 
 from . import models, ext
-from OctBlog.config import OctBlogSettings
 
 search_engine_submit_urls = OctBlogSettings['search_engine_submit_urls']
 
 octblog_signals = Namespace()
 post_visited = octblog_signals.signal('post-visited')
 post_pubished = octblog_signals.signal('post-published')
+
 
 @post_visited.connect
 def on_post_visited(sender, post, **extra):

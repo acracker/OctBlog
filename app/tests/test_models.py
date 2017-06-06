@@ -1,7 +1,8 @@
 import unittest
-from flask import current_app
+
 from OctBlog import create_app, db
 from accounts import models as accounts_models
+from flask import current_app
 from main import models as main_models
 
 
@@ -16,10 +17,8 @@ class ModelTestCase(unittest.TestCase):
         db.connection.drop_database(db_name)
         self.app_context.pop()
 
-
     def test_db_is_testing(self):
-        self.assertTrue(current_app.config['MONGODB_SETTINGS'].get('DB')=='OctBlogTest')
-
+        self.assertTrue(current_app.config['MONGODB_SETTINGS'].get('DB') == 'OctBlogTest')
 
     def test_create_user(self):
         user = accounts_models.User()
@@ -37,7 +36,7 @@ class ModelTestCase(unittest.TestCase):
 
         created_user = accounts_models.User.objects.get(username='octblog')
 
-        self.assertTrue(created_user is not None and created_user.email=='octblog@example.com')
+        self.assertTrue(created_user is not None and created_user.email == 'octblog@example.com')
 
     def test_create_post(self):
         post = main_models.Post()
@@ -48,8 +47,8 @@ class ModelTestCase(unittest.TestCase):
         post.abstract = 'abstract'
         post.raw = 'content'
         user = accounts_models.User()
-        user.username='user'
-        user.password='password'
+        user.username = 'user'
+        user.password = 'password'
         user.save()
         post.author = user
         post.category = 'category1'
@@ -59,4 +58,4 @@ class ModelTestCase(unittest.TestCase):
 
         post = main_models.Post.objects.get(slug='slug')
 
-        self.assertTrue(post is not None and post.title=='title')
+        self.assertTrue(post is not None and post.title == 'title')

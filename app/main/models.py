@@ -1,34 +1,37 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import datetime, hashlib, urllib
-from flask import url_for
+import datetime
+import hashlib
+import urllib
 
-import markdown2, bleach
-
+import bleach
+import markdown2
 from OctBlog import db
 from OctBlog.config import OctBlogSettings
 from accounts.models import User
+from flask import url_for
+
 
 def get_clean_html_content(html_content):
     allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
-                        'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
-                        'h1', 'h2', 'h3', 'h4', 'h5', 'p', 'hr', 'img',
-                        'table', 'thead', 'tbody', 'tr', 'th', 'td']
+                    'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
+                    'h1', 'h2', 'h3', 'h4', 'h5', 'p', 'hr', 'img',
+                    'table', 'thead', 'tbody', 'tr', 'th', 'td']
 
     allowed_attrs = {
-                '*': ['class'],
-                'a': ['href', 'rel', 'name'],
-                'img': ['alt', 'src', 'title'],
-            }
+        '*': ['class'],
+        'a': ['href', 'rel', 'name'],
+        'img': ['alt', 'src', 'title'],
+    }
     html_content = bleach.linkify(bleach.clean(html_content, tags=allowed_tags, attributes=allowed_attrs, strip=True))
     return html_content
-
 
 
 POST_TYPE_CHOICES = ('post', 'page', 'wechat')
 GAVATAR_CDN_BASE = OctBlogSettings['gavatar_cdn_base']
 GAVATAR_DEFAULT_IMAGE = OctBlogSettings['gavatar_default_image']
+
 
 class Post(db.Document):
     title = db.StringField(max_length=255, default='new blog', required=True)
@@ -64,7 +67,8 @@ class Post(db.Document):
                 self.pub_time = now
             self.update_time = now
         # self.content_html = self.raw
-        self.content_html = markdown2.markdown(self.raw, extras=['code-friendly', 'fenced-code-blocks', 'tables']).encode('utf-8')
+        self.content_html = markdown2.markdown(self.raw,
+                                               extras=['code-friendly', 'fenced-code-blocks', 'tables']).encode('utf-8')
         self.content_html = get_clean_html_content(self.content_html)
         return super(Post, self).save(*args, **kwargs)
 
@@ -89,7 +93,6 @@ class Post(db.Document):
 
         return post_dict
 
-
     def __unicode__(self):
         return self.title
 
@@ -98,6 +101,7 @@ class Post(db.Document):
         'indexes': ['slug'],
         'ordering': ['-pub_time']
     }
+
 
 # class Post(PostBase):
 #     fix_slug = db.StringField(max_length=255, required=False)
@@ -126,10 +130,10 @@ class Draft(db.Document):
         if not self.pub_time:
             self.pub_time = now
         self.update_time = now
-        self.content_html = markdown2.markdown(self.raw, extras=['code-friendly', 'fenced-code-blocks', 'tables']).encode('utf-8')
+        self.content_html = markdown2.markdown(self.raw,
+                                               extras=['code-friendly', 'fenced-code-blocks', 'tables']).encode('utf-8')
         self.content_html = get_clean_html_content(self.content_html)
         return super(Draft, self).save(*args, **kwargs)
-
 
     def __unicode__(self):
         return self.title
@@ -139,6 +143,7 @@ class Draft(db.Document):
         'indexes': ['slug'],
         'ordering': ['-update_time']
     }
+
 
 class Tracker(db.Document):
     post = db.ReferenceField(Post)
@@ -166,6 +171,7 @@ class PostStatistics(db.Document):
     visit_count = db.IntField(default=0)
     verbose_count_base = db.IntField(default=0)
 
+
 class Widget(db.Document):
     title = db.StringField(default='widget')
     md_content = db.StringField()
@@ -176,7 +182,9 @@ class Widget(db.Document):
 
     def save(self, *args, **kwargs):
         if self.md_content:
-            self.html_content = markdown2.markdown(self.md_content, extras=['code-friendly', 'fenced-code-blocks', 'tables']).encode('utf-8')
+            self.html_content = markdown2.markdown(self.md_content,
+                                                   extras=['code-friendly', 'fenced-code-blocks', 'tables']).encode(
+                'utf-8')
 
         self.html_content = get_clean_html_content(self.html_content)
 
@@ -193,7 +201,10 @@ class Widget(db.Document):
         'ordering': ['priority']
     }
 
+
 COMMENT_STATUS = ('approved', 'pending', 'spam', 'deleted')
+
+
 class Comment(db.Document):
     author = db.StringField(required=True)
     email = db.EmailField(max_length=255)
@@ -207,7 +218,7 @@ class Comment(db.Document):
     update_time = db.DateTimeField()
     replay_to = db.ReferenceField('self')
     status = db.StringField(choices=COMMENT_STATUS, default='pending')
-    misc = db.StringField() # If the comment is imported, this field will store something useful
+    misc = db.StringField()  # If the comment is imported, this field will store something useful
     gavatar_id = db.StringField(default='00000000000')
 
     def reset_gavatar_id(self):
@@ -218,7 +229,8 @@ class Comment(db.Document):
 
     def save(self, *args, **kwargs):
         if self.md_content:
-            html_content = markdown2.markdown(self.md_content, extras=['code-friendly', 'fenced-code-blocks', 'tables', 'nofollow']).encode('utf-8')
+            html_content = markdown2.markdown(self.md_content, extras=['code-friendly', 'fenced-code-blocks', 'tables',
+                                                                       'nofollow']).encode('utf-8')
             self.html_content = get_clean_html_content(html_content)
 
         if not self.pub_time:
@@ -226,7 +238,7 @@ class Comment(db.Document):
 
         self.update_time = datetime.datetime.now()
 
-        if self.gavatar_id=='00000000000':
+        if self.gavatar_id == '00000000000':
             self.reset_gavatar_id()
 
         return super(Comment, self).save(*args, **kwargs)

@@ -1,8 +1,7 @@
 import unittest
-from flask import current_app, url_for
+
 from OctBlog import create_app, db
-from accounts import models as accounts_models
-from main import models as main_models
+from flask import current_app, url_for
 
 
 class ModelTestCase(unittest.TestCase):
@@ -19,15 +18,15 @@ class ModelTestCase(unittest.TestCase):
 
     def test_home_page(self):
         response = self.client.get(url_for('main.index'))
-        self.assertTrue(response.status_code==200)
+        self.assertTrue(response.status_code == 200)
 
-    # def test_register_and_login(self):
-    #     response = self.client.post(url_for('accounts.register'), data={
-    #         'username': 'octblog',
-    #         'email': 'octblog@example.com',
-    #         'password': 'octblog',
-    #         'password2': 'octblog'
-    #     })
-    #
-    #     self.app.logger.debug(response.status_code)
-    #     self.assertTrue(response.status_code==302)
+        # def test_register_and_login(self):
+        #     response = self.client.post(url_for('accounts.register'), data={
+        #         'username': 'octblog',
+        #         'email': 'octblog@example.com',
+        #         'password': 'octblog',
+        #         'password2': 'octblog'
+        #     })
+        #
+        #     self.app.logger.debug(response.status_code)
+        #     self.assertTrue(response.status_code==302)

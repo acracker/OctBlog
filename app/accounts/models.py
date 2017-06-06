@@ -1,15 +1,17 @@
 from __future__ import unicode_literals
+
 import datetime
+
+from OctBlog import db, login_manager
 # from flask.ext.login import UserMixin
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from OctBlog import db, login_manager
 
 # ROLES = ('admin', 'editor', 'writer', 'reader')
 ROLES = (('admin', 'admin'),
-            ('editor', 'editor'),
-            ('writer', 'writer'),
-            ('reader', 'reader'))
+         ('editor', 'editor'),
+         ('writer', 'writer'),
+         ('reader', 'reader'))
 SOCIAL_NETWORKS = {
     'weibo': {'fa_icon': 'fa fa-weibo', 'url': None},
     'weixin': {'fa_icon': 'fa fa-weixin', 'url': None},
@@ -18,6 +20,7 @@ SOCIAL_NETWORKS = {
     'facebook': {'fa_icon': 'fa fa-facebook', 'url': None},
     'linkedin': {'fa_icon': 'fa fa-linkedin', 'url': None},
 }
+
 
 class User(UserMixin, db.Document):
     username = db.StringField(max_length=255, required=True)
@@ -57,7 +60,6 @@ class User(UserMixin, db.Document):
         return self.username
 
 
-    
 @login_manager.user_loader
 def load_user(username):
     try:
@@ -65,4 +67,3 @@ def load_user(username):
     except User.DoesNotExist:
         user = None
     return user
-

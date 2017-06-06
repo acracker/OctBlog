@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from flask import current_app
+from flask_login import current_user
 # from flask.ext.principal import Permission, RoleNeed, UserNeed, identity_loaded
 # from flask.ext.login import current_user
 from flask_principal import Permission, RoleNeed, UserNeed, identity_loaded
-from flask_login import current_user
 
 # admin_need = RoleNeed('admin')
 # editor_need = RoleNeed('editor')
@@ -20,7 +19,7 @@ writer_permission = Permission(RoleNeed('writer')).union(editor_permission)
 reader_permission = Permission(RoleNeed('reader')).union(writer_permission)
 
 
-@identity_loaded.connect # Both of this and the following works
+@identity_loaded.connect  # Both of this and the following works
 # @identity_loaded.connect_via(current_app)
 def on_identity_loaded(sender, identity):
     # Set the identity user object
@@ -35,7 +34,7 @@ def on_identity_loaded(sender, identity):
     if hasattr(current_user, 'role'):
         # for role in current_user.roles:
         identity.provides.add(RoleNeed(current_user.role))
-    
+
     # if current_user.is_superuser:
     if hasattr(current_user, 'is_superuser') and current_user.is_superuser:
         identity.provides.add(su_need)
