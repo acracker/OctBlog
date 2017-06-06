@@ -15,13 +15,13 @@ if sys.version_info < (3, 0):
         'allow_donate': os.environ.get('allow_donate', 'true').lower() == 'true',
         'auto_role': os.environ.get('auto_role', 'reader').lower(),
         'blog_meta': {
-            'name': os.environ.get('name', 'Oct Blog').decode('utf8'),
-            'subtitle': os.environ.get('subtitle', 'Oct Blog Subtitle').decode('utf8'),
-            'description': os.environ.get('description', 'Oct Blog Description').decode('utf8'),
-            'wechat_name': os.environ.get('wechat_name', 'Oct Blog Wechat Root').decode('utf8'),
-            'wechat_subtitle': os.environ.get('wechat_subtitle', 'Oct Blog Wechat Subtitle').decode('utf8'),
-            'owner': os.environ.get('owner', 'Gevin').decode('utf8'),
-            'keywords': os.environ.get('keywords', 'python,django,flask,docker,MongoDB').decode('utf8'),
+            'name': os.environ.get('name', '一枚苦逼网管').decode('utf8'),
+            'subtitle': os.environ.get('subtitle', '拉网线, 修电脑, 扯蛋,运维, 破解, Linux, Python, C++').decode('utf8'),
+            'description': os.environ.get('description', '运维, 破解, Linux, Python, C++').decode('utf8'),
+            'wechat_name': os.environ.get('wechat_name', 'acracker Wechat Root').decode('utf8'),
+            'wechat_subtitle': os.environ.get('wechat_subtitle', 'acracker Wechat Subtitle').decode('utf8'),
+            'owner': os.environ.get('owner', 'acracker').decode('utf8'),
+            'keywords': os.environ.get('keywords', '运维, 破解, Linux, Python, C++,python,django,flask,docker,MongoDB').decode('utf8'),
             'google_site_verification': os.environ.get('google_site_verification') or '12345678',
             'baidu_site_verification': os.environ.get('baidu_site_verification') or '87654321',
             'sogou_site_verification': os.environ.get('sogou_site_verification') or '87654321',
@@ -84,18 +84,13 @@ else:
         'allow_donate': os.environ.get('allow_donate', 'true').lower() == 'true',
         'auto_role': os.environ.get('auto_role', 'reader').lower(),
         'blog_meta': {
-            'name': os.environ.get('name') if os.environ.get('name') else 'Oct Blog',
-            'subtitle': os.environ.get('subtitle') if os.environ.get('subtitle') else 'Oct Blog Subtitle',
-            'description': os.environ.get('description') if os.environ.get('description') else 'Oct Blog Description',
-            'wechat_name': os.environ.get('wechat_name') if os.environ.get('wechat_name') else 'Oct Blog Wechat Root',
-            'wechat_subtitle': os.environ.get('wechat_subtitle') if os.environ.get(
-                'wechat_subtitle') else 'Oct Blog Wechat Subtitle',
-            'owner': os.environ.get('owner') if os.environ.get('owner') else 'Gevin',
-            'keywords': os.environ.get('keywords') if os.environ.get(
-                'keywords') else 'python,django,flask,docker,MongoDB',
-            'google_site_verification': os.environ.get('google_site_verification') or '12345678',
-            'baidu_site_verification': os.environ.get('baidu_site_verification') or '87654321',
-            'sogou_site_verification': os.environ.get('sogou_site_verification') or '87654321',
+            'name': os.environ.get('name', '一枚苦逼网管').decode('utf8'),
+            'subtitle': os.environ.get('subtitle', '拉网线, 修电脑, 扯蛋,运维, 破解, Linux, Python, C++').decode('utf8'),
+            'description': os.environ.get('description', '运维, 破解, Linux, Python, C++').decode('utf8'),
+            'wechat_name': os.environ.get('wechat_name', 'acracker Wechat Root').decode('utf8'),
+            'wechat_subtitle': os.environ.get('wechat_subtitle', 'acracker Wechat Subtitle').decode('utf8'),
+            'owner': os.environ.get('owner', 'acracker').decode('utf8'),
+            'keywords': os.environ.get('keywords', '运维, 破解, Linux, Python, C++,python,django,flask,docker,MongoDB').decode('utf8'),
         },
         'search_engine_submit_urls': {
             'baidu': os.environ.get('baidu_submit_url')
@@ -153,7 +148,7 @@ class Config(object):
 
     BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'fjdljLJDL08_80jflKzcznv*c'
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'fxxdljfsad2LJDL08_80jflKzcznv*c'
     MONGODB_SETTINGS = {'DB': 'OctBlog'}
 
     TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates').replace('\\', '/')
