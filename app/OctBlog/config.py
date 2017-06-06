@@ -48,13 +48,13 @@ if sys.version_info < (3, 0):
             'donation_msg': os.environ.get('donation_msg',
                                            'You can donate to me if the article makes sense to you').decode('utf8'),
             'donation_img_url': os.environ.get(
-                'donation_img_url') or 'http://or3t8xowf.bkt.clouddn.com/weixin-pay.jpg'
+                'donation_img_url') or 'http://or3t8xowf.bkt.clouddn.com/weixin-pay.jpg?imageView2/1/w/200/h/200/q/100'
         },
         'wechat': {
             'display_wechat': os.environ.get('display_wechat', 'true').lower() == 'true',
             'wechat_msg': os.environ.get('wechat_msg', 'Welcome to follow my wechat').decode('utf8'),
             'wechat_image_url': os.environ.get(
-                'wechat_image_url') or 'http://or3t8xowf.bkt.clouddn.com/gevin-view.jpg.jpg',
+                'wechat_image_url') or 'http://or3t8xowf.bkt.clouddn.com/gevin-view.jpg.jpg?imageView2/1/w/200/h/200/q/100',
             'wechat_title': os.environ.get('wechat_title', 'GevinView'),
         },
         'copyright': {
@@ -118,13 +118,13 @@ else:
             'allow_donate': os.environ.get('allow_donate', 'true').lower() == 'true',
             'donation_msg': os.environ.get('donation_msg', 'You can donate to me if the article makes sense to you'),
             'donation_img_url': os.environ.get(
-                'donation_img_url') or 'http://or3t8xowf.bkt.clouddn.com/weixin-pay.jpg'
+                'donation_img_url') or 'http://or3t8xowf.bkt.clouddn.com/weixin-pay.jpg?imageView2/1/w/200/h/200/q/100'
         },
         'wechat': {
             'display_wechat': os.environ.get('display_wechat', 'true').lower() == 'true',
             'wechat_msg': os.environ.get('wechat_msg', 'Welcome to follow my wechat'),
             'wechat_image_url': os.environ.get(
-                'wechat_image_url') or 'http://or3t8xowf.bkt.clouddn.com/gevin-view.jpg.jpg',
+                'wechat_image_url') or 'http://or3t8xowf.bkt.clouddn.com/gevin-view.jpg.jpg?imageView2/1/w/200/h/200/q/100',
             'wechat_title': os.environ.get('wechat_title', 'GevinView'),
         },
         'copyright': {
