@@ -15,13 +15,13 @@ if sys.version_info < (3, 0):
         'allow_donate': os.environ.get('allow_donate', 'true').lower() == 'true',
         'auto_role': os.environ.get('auto_role', 'reader').lower(),
         'blog_meta': {
-            'name': os.environ.get('name', u'一枚苦逼网管').decode('utf8'),
-            'subtitle': os.environ.get('subtitle', u'拉网线, 修电脑, 扯蛋,运维, 破解, Linux, Python, C++').decode('utf8'),
-            'description': os.environ.get('description', u'运维, 破解, Linux, Python, C++').decode('utf8'),
+            'name': os.environ.get('name', 'loser').decode('utf8'),
+            'subtitle': os.environ.get('subtitle', 'Ops, Crack, Linux, Python, C++').decode('utf8'),
+            'description': os.environ.get('description', 'Ops, Crack, Linux, Python, C++').decode('utf8'),
             'wechat_name': os.environ.get('wechat_name', 'acracker Wechat Root').decode('utf8'),
             'wechat_subtitle': os.environ.get('wechat_subtitle', 'acracker Wechat Subtitle').decode('utf8'),
             'owner': os.environ.get('owner', 'acracker').decode('utf8'),
-            'keywords': os.environ.get('keywords', u'运维, 破解, Linux, Python, C++,python,django,flask,docker,MongoDB').decode('utf8'),
+            'keywords': os.environ.get('keywords', u'Ops, Crack, Linux,python,django,flask,docker,MongoDB').decode('utf8'),
             'google_site_verification': os.environ.get('google_site_verification') or '12345678',
             'baidu_site_verification': os.environ.get('baidu_site_verification') or '87654321',
             'sogou_site_verification': os.environ.get('sogou_site_verification') or '87654321',
@@ -84,13 +84,18 @@ else:
         'allow_donate': os.environ.get('allow_donate', 'true').lower() == 'true',
         'auto_role': os.environ.get('auto_role', 'reader').lower(),
         'blog_meta': {
-            'name': os.environ.get('name', u'一枚苦逼网管').decode('utf8'),
-            'subtitle': os.environ.get('subtitle', u'拉网线, 修电脑, 扯蛋,运维, 破解, Linux, Python, C++').decode('utf8'),
-            'description': os.environ.get('description', u'运维, 破解, Linux, Python, C++').decode('utf8'),
-            'wechat_name': os.environ.get('wechat_name', 'acracker Wechat Root').decode('utf8'),
-            'wechat_subtitle': os.environ.get('wechat_subtitle', 'acracker Wechat Subtitle').decode('utf8'),
-            'owner': os.environ.get('owner', 'acracker').decode('utf8'),
-            'keywords': os.environ.get('keywords', u'运维, 破解, Linux, Python, C++,python,django,flask,docker,MongoDB').decode('utf8'),
+            'name': os.environ.get('name') if os.environ.get('name') else '一枚苦逼网管',
+            'subtitle': os.environ.get('subtitle') if os.environ.get('subtitle') else '拉网线, 修电脑, 扯蛋,运维, 破解, Linux, Python, C++',
+            'description': os.environ.get('description') if os.environ.get('description') else '运维, 破解, Linux, Python, C++',
+            'wechat_name': os.environ.get('wechat_name') if os.environ.get('wechat_name') else '运维, 破解, Linux, Python, C++',
+            'wechat_subtitle': os.environ.get('wechat_subtitle') if os.environ.get(
+                'wechat_subtitle') else '运维, 破解, Linux, Python, C++',
+            'owner': os.environ.get('owner') if os.environ.get('owner') else 'acracker',
+            'keywords': os.environ.get('keywords') if os.environ.get(
+                'keywords') else '运维, 破解, Linux, Python, C++, django, flask, docker, MongoDB',
+            'google_site_verification': os.environ.get('google_site_verification') or '12345678',
+            'baidu_site_verification': os.environ.get('baidu_site_verification') or '87654321',
+            'sogou_site_verification': os.environ.get('sogou_site_verification') or '87654321',
         },
         'search_engine_submit_urls': {
             'baidu': os.environ.get('baidu_submit_url')
